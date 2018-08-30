@@ -131,20 +131,24 @@ public class CheckVersion {
 
     private void startDownload() {
         if(storagePermission(true)) {
+            try {
+                DownloadFileFromURL downloadFileFromURL = new DownloadFileFromURL(getActivity(), paramsVersion, projectName);
+                downloadFileFromURL.setOnDownloadFinished(new DownloadFileFromURL.OnDownloadFinished() {
+                    @Override
+                    public void onSuccess(String path) {
+                        install(path);
+                    }
 
-            DownloadFileFromURL downloadFileFromURL = new DownloadFileFromURL(getActivity(), paramsVersion,projectName);
-            downloadFileFromURL.setOnDownloadFinished(new DownloadFileFromURL.OnDownloadFinished() {
-                @Override
-                public void onSuccess(String path) {
-                    install(path);
-                }
-
-                @Override
-                public void onFailed() {
-                    openDownloadPage();
-                }
-            });
-            downloadFileFromURL.execute(paramsVersion.getUrl());
+                    @Override
+                    public void onFailed() {
+                        openDownloadPage();
+                    }
+                });
+                downloadFileFromURL.execute(paramsVersion.getUrl());
+            }catch (Exception ex){
+                ex.printStackTrace();
+                openDownloadPage();
+            }
         }
 
     }
