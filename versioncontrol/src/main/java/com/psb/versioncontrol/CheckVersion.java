@@ -89,6 +89,9 @@ public class CheckVersion {
             throw new RuntimeException(activity.toString()
                     + " must have valid url");
         }else{
+            if(!url.substring(url.length()-1).contains("/")){
+                url=url+"/";
+            }
             RetrofitService.setBaseUrl(url);
         }
     }

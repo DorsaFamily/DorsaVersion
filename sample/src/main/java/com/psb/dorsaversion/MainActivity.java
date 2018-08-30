@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String BASE_URL = "http://79.175.155.143/fandoghestan/api/VersionsDorsa/";
+        String BASE_URL = "http://79.175.155.143/fandoghestan/api/VersionsDorsa";
 
         checkVersion=new CheckVersion(this,BASE_URL,"testDorsa");
         checkVersion.setDebug(true);
