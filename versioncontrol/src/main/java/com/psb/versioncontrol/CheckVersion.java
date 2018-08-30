@@ -33,12 +33,18 @@ public class CheckVersion {
     private ParamsVersion paramsVersion;
     private onTaskFinished onTaskFinished;
     private ProgressDialog progressDialog;
+    private String projectName;
 
 
-    public CheckVersion(Activity activity,String baseUrl) {
+    public CheckVersion(Activity activity,
+                        String baseUrl,
+                        String projectName
+                        ) {
         this.activity = activity;
         progressDialog=new ProgressDialog(activity);
         progressDialog.setMessage("در حال بررسی ...");
+
+        this.projectName=projectName;
 
         setBaseUrl(baseUrl);
     }
@@ -123,7 +129,7 @@ public class CheckVersion {
     private void startDownload() {
         if(storagePermission(true)) {
 
-            DownloadFileFromURL downloadFileFromURL = new DownloadFileFromURL(getActivity(), paramsVersion,"TestDorsa");
+            DownloadFileFromURL downloadFileFromURL = new DownloadFileFromURL(getActivity(), paramsVersion,projectName);
             downloadFileFromURL.setOnDownloadFinished(new DownloadFileFromURL.OnDownloadFinished() {
                 @Override
                 public void onSuccess(String path) {
@@ -231,7 +237,8 @@ public class CheckVersion {
     }
 
     public interface Get_Check_Version {
-        @GET("VersionsDorsa")
+//        @GET("VersionsDorsa")
+        @GET("?")
         Call<ResponseVersion> getVersion();
     }
 
