@@ -179,7 +179,7 @@ public class CheckVersion {
         try {
             File toInstall = new File(path);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Uri apkUri = FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID + ".provider", toInstall);
+                Uri apkUri = FileProvider.getUriForFile(getActivity(), getActivity().getApplicationContext().getPackageName()+ ".provider", toInstall);
                 Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
                 intent.setData(apkUri);
                 intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

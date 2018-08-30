@@ -21,7 +21,7 @@ public class DownloadFileFromURL extends AsyncTask<String, Integer, Boolean> {
     private ParamsVersion model;
     private OnDownloadFinished onDownloadFinished;
 
-    public static String parentPathName = "dorsaTest";
+    public static String parentPathName ;
     private String path ;
 
     private CProgressDialog progressDialog;
