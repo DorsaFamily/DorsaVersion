@@ -34,17 +34,20 @@ public class CheckVersion {
     private onTaskFinished onTaskFinished;
     private ProgressDialog progressDialog;
     private String projectName;
+    private int currentVersion;
 
 
     public CheckVersion(Activity activity,
                         String baseUrl,
-                        String projectName
+                        String projectName,
+                        int currentVersion
                         ) {
         this.activity = activity;
         progressDialog=new ProgressDialog(activity);
         progressDialog.setMessage("در حال بررسی ...");
 
         this.projectName=projectName;
+        this.currentVersion=currentVersion;
 
         setBaseUrl(baseUrl);
     }
@@ -62,7 +65,7 @@ public class CheckVersion {
                 progressDialog.cancel();
                 if (response.code() == 200) {
                     if (response.body().getExtra().size() > 0) {
-                        if(response.body().getExtra().get(0).getVersion()>BuildConfig.VERSION_CODE){
+                        if(response.body().getExtra().get(0).getVersion()>currentVersion){
                             paramsVersion = response.body().getExtra().get(0);
                             showMessageDialog();
                         }else{
