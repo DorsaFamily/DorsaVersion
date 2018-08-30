@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="25dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/bgr_round_ff"
+        android:layout_height="wrap_content">
+
+        <com.psb.versioncontrol.customview.CTextViewBold
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/Black"
+            android:text="دانلود نسخه جدید"
+            android:textSize="14sp" />
+
+        <com.psb.versioncontrol.customview.CTextView
+            android:id="@+id/text_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/textView24"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/Black"
+            android:text="0 %"
+            android:textSize="12sp" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_progress"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:max="100"
+            />
+
+        <com.psb.versioncontrol.customview.cButton
+            android:id="@+id/button3"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/progress"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:stateListAnimator="@null"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_ok_dialog_register"
+            android:text="لغو"
+            android:textSize="14sp"
+            android:textColor="@color/White" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
