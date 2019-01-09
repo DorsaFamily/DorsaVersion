@@ -2,7 +2,6 @@ package com.psb.versioncontrol.utils;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Environment;
 
 import com.psb.versioncontrol.customview.dialog.CProgressDialog;
 import com.psb.versioncontrol.model.ParamsVersion;
@@ -30,7 +29,9 @@ public class DownloadFileFromURL extends AsyncTask<String, Integer, Boolean> {
         this.model = model;
         progressDialog=new CProgressDialog(context);
         this.parentPathName=parentPathName;
-        path = Environment.getExternalStorageDirectory() + "/" + parentPathName;
+        File directory=new File(context.getFilesDir(),"temp");
+//        path = Environment.getExternalStorageDirectory() + "/" + parentPathName;
+        path = context.getFilesDir() + "/" + parentPathName;
     }
 
 

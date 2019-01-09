@@ -16,9 +16,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 //        String BASE_URL = "http://79.175.155.143/fandoghestan/api/VersionsDorsa";
-        String BASE_URL = "http://79.175.155.143/golobolbol/api/Version";
+        String BASE_URL = "http://getboomboom.ir/api/Version/Get";
 
-        checkVersion=new CheckVersion(this,BASE_URL,"testDorsa",BuildConfig.VERSION_CODE);
+        checkVersion=new CheckVersion(this,BASE_URL,"BoomBoom",BuildConfig.VERSION_CODE);
         checkVersion.setDebug(true);
         checkVersion.getVersion(new CheckVersion.onTaskFinished() {
             @Override

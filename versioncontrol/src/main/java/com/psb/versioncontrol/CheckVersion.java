@@ -1,10 +1,8 @@
 package com.psb.versioncontrol;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.FileProvider;
@@ -16,12 +14,12 @@ import com.psb.versioncontrol.utils.DownloadFileFromURL;
 import com.psb.versioncontrol.utils.RetrofitService;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 
 public class CheckVersion {
@@ -35,6 +33,8 @@ public class CheckVersion {
     private ProgressDialog progressDialog;
     private String projectName;
     private int currentVersion;
+    private boolean isVas=false;
+
 
 
     public CheckVersion(Activity activity,
@@ -57,14 +57,14 @@ public class CheckVersion {
 
         progressDialog.show();
         Get_Check_Version service = RetrofitService.getClient().create(Get_Check_Version.class);
-        Call<ResponseVersion> call = service.getVersion();
+        Call<ResponseVersion> call = service.getVersion(isVas);
 
         call.enqueue(new Callback<ResponseVersion>() {
             @Override
             public void onResponse(Call<ResponseVersion> call, Response<ResponseVersion> response) {
                 progressDialog.cancel();
                 if (response.code() == 200) {
-                    if (response.body().getExtra().size() > 0) {
+                    if (response.body().getExtra()!=null && response.body().getExtra().size() > 0) {
                         if(response.body().getExtra().get(0).getVersion()>currentVersion){
                             paramsVersion = response.body().getExtra().get(0);
                             showMessageDialog();
@@ -101,6 +101,10 @@ public class CheckVersion {
 
     public void setDebug(boolean isDebug){
         RetrofitService.setDebug(isDebug);
+    }
+
+    public void setVas(boolean vas) {
+        isVas = vas;
     }
 
     private void showMessageDialog() {
@@ -158,7 +162,7 @@ public class CheckVersion {
 
     boolean storagePermission(boolean showRequest) {
         boolean storagePer = true;
-        ArrayList<String> permissions = new ArrayList<String>();
+       /* ArrayList<String> permissions = new ArrayList<String>();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (getActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -174,7 +178,7 @@ public class CheckVersion {
             if (!storagePer && showRequest) {
                 getActivity().requestPermissions(permissions.toArray(new String[permissions.size()]), REQUEST_PERMISSION);
             }
-        }
+        }*/
         return storagePer;
     }
 
@@ -249,7 +253,7 @@ public class CheckVersion {
     public interface Get_Check_Version {
 //        @GET("VersionsDorsa")
         @GET("?")
-        Call<ResponseVersion> getVersion();
+        Call<ResponseVersion> getVersion(@Query("isVas") boolean isVas);
     }
 
 }
