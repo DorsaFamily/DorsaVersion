@@ -1,47 +1,44 @@
+
 package com.psb.versioncontrol.model;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-import java.util.List;
+public class ResponseVersion {
 
-
-public class ResponseVersion implements Serializable {
-
-    private final static long serialVersionUID = -1308527402695605575L;
-    @SerializedName("Result")
+    @SerializedName("ok")
     @Expose
-    private Boolean result;
-    @SerializedName("Message")
+    private Boolean ok;
+    @SerializedName("messages")
     @Expose
-    private String message;
-    @SerializedName("Extra")
+    private List<Message> messages = null;
+    @SerializedName("extra")
     @Expose
-    private List<ParamsVersion> extra = null;
+    private ExtraVersion extra;
 
-    public Boolean getResult() {
-        return result;
+    public Boolean getOk() {
+        return ok;
     }
 
-    public void setResult(Boolean result) {
-        this.result = result;
+    public void setOk(Boolean ok) {
+        this.ok = ok;
     }
 
-    public String getMessage() {
-        return message;
+    public List<Message> getMessages() {
+        return messages;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 
-    public List<ParamsVersion> getExtra() {
+    public ExtraVersion getExtraVersion() {
         return extra;
     }
 
-    public void setExtra(List<ParamsVersion> extra) {
-        this.extra = extra;
+    public void setExtraVersion(ExtraVersion extraVersion) {
+        this.extra = extraVersion;
     }
 
 }

@@ -6,9 +6,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 
 import com.psb.versioncontrol.customview.dialog.QuestionDialog;
-import com.psb.versioncontrol.model.ParamsVersion;
+import com.psb.versioncontrol.model.ExtraVersion;
 import com.psb.versioncontrol.model.ResponseVersion;
 import com.psb.versioncontrol.utils.DownloadFileFromURL;
 import com.psb.versioncontrol.utils.RetrofitService;
@@ -28,7 +29,7 @@ public class CheckVersion {
 
     private final int REQUEST_INSTALL = 10;
     private final int REQUEST_PERMISSION = 11;
-    private ParamsVersion paramsVersion;
+    private ExtraVersion paramsVersion;
     private onTaskFinished onTaskFinished;
     private ProgressDialog progressDialog;
     private String projectName;
@@ -64,9 +65,9 @@ public class CheckVersion {
             public void onResponse(Call<ResponseVersion> call, Response<ResponseVersion> response) {
                 progressDialog.cancel();
                 if (response.code() == 200) {
-                    if (response.body().getExtra()!=null && response.body().getExtra().size() > 0) {
-                        if(response.body().getExtra().get(0).getVersion()>currentVersion){
-                            paramsVersion = response.body().getExtra().get(0);
+                    if (response.body().getExtraVersion()!=null ) {
+                        if(response.body().getExtraVersion().getVersion()>currentVersion){
+                            paramsVersion = response.body().getExtraVersion();
                             showMessageDialog();
                         }else{
                             finishTask(false);
@@ -115,7 +116,7 @@ public class CheckVersion {
         dialog.setOnClickListener("انصراف", "دریافت", new QuestionDialog.OnClickListener() {
             @Override
             public void onCancel() {
-                if (paramsVersion.isForce()) {
+                if (paramsVersion.getIsForce()) {
                     finishTask(true);
                 } else {
                     finishTask(false);
@@ -235,7 +236,7 @@ public class CheckVersion {
         }catch (Exception ex){
             ex.printStackTrace();
         }finally {
-            if (paramsVersion.isForce()) {
+            if (paramsVersion.getIsForce()) {
                 finishTask(true);
             }
         }

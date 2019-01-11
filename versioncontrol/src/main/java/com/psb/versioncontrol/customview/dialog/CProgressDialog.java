@@ -15,7 +15,7 @@ import com.psb.versioncontrol.R;
 
 public class CProgressDialog extends Dialog {
 
-    private Button btnCancel;
+    private View btnCancel;
     private ProgressBar progress;
     private TextView textProgress;
     private OnClicked onClicked;

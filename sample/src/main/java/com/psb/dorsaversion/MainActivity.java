@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         checkVersion=new CheckVersion(this,BASE_URL,"BoomBoom",BuildConfig.VERSION_CODE);
         checkVersion.setDebug(true);
+        checkVersion.setVas(true);
         checkVersion.getVersion(new CheckVersion.onTaskFinished() {
             @Override
             public void onFinished(boolean exit) {

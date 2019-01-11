@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.psb.versioncontrol.customview.dialog.CProgressDialog;
-import com.psb.versioncontrol.model.ParamsVersion;
+import com.psb.versioncontrol.model.ExtraVersion;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -17,15 +17,15 @@ import java.net.URLConnection;
 
 public class DownloadFileFromURL extends AsyncTask<String, Integer, Boolean> {
 
-    private ParamsVersion model;
+    private ExtraVersion model;
     private OnDownloadFinished onDownloadFinished;
 
     public static String parentPathName ;
     private String path ;
 
     private CProgressDialog progressDialog;
-    public DownloadFileFromURL(Context context, ParamsVersion model,String parentPathName) {
-        this.model = new ParamsVersion();
+    public DownloadFileFromURL(Context context, ExtraVersion model, String parentPathName) {
+        this.model = new ExtraVersion();
         this.model = model;
         progressDialog=new CProgressDialog(context);
         this.parentPathName=parentPathName;

@@ -1,4 +1,4 @@
-package com.psb.versioncontrol.model;
+package com.psb.versioncontrol.backupModels;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -7,21 +7,25 @@ import java.io.Serializable;
 
 public class ParamsVersion implements Serializable {
 
-    @SerializedName("Url")
+    @SerializedName("url")
     @Expose
     private String url;
-    @SerializedName("Msg")
+    @SerializedName("msg")
     @Expose
     private String msg;
-    @SerializedName("Title")
+    @SerializedName("title")
     @Expose
     private String title;
-    @SerializedName("Version")
+    @SerializedName("version")
     @Expose
-    private Integer version;
-    @SerializedName("IsForce")
+    private String version;
+    @SerializedName("isForce")
     @Expose
     private boolean isForce;
+    @SerializedName("versionType")
+    @Expose
+    private String versionType;
+
     private final static long serialVersionUID = -8596167243326914395L;
 
     public String getUrl() {
@@ -41,11 +45,11 @@ public class ParamsVersion implements Serializable {
     }
 
     public Integer getVersion() {
-        return version;
+        return Integer.parseInt(version);
     }
 
     public void setVersion(Integer version) {
-        this.version = version;
+        this.version = ""+version;
     }
 
     public String getTitle() {
@@ -62,5 +66,13 @@ public class ParamsVersion implements Serializable {
 
     public void setForce(boolean force) {
         isForce = force;
+    }
+
+    public String getVersionType() {
+        return versionType;
+    }
+
+    public void setVersionType(String versionType) {
+        this.versionType = versionType;
     }
 }

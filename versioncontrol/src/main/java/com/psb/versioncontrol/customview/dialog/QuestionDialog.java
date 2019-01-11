@@ -14,8 +14,8 @@ import com.psb.versioncontrol.R;
 
 public class QuestionDialog extends Dialog {
 
-    private Button btnCancel ;
-    private Button btnOk ;
+    private View btnCancel;
+    private View btnOk;
     private TextView textTitle;
     private TextView textMessage;
 
@@ -37,48 +37,61 @@ public class QuestionDialog extends Dialog {
         init();
     }
 
-    private void init(){
+    private void init() {
         setContentView(R.layout.dialog_question);
         setCancelable(false);
         getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         btnCancel = findViewById(R.id.buttonCancel);
         btnOk = findViewById(R.id.buttonTaiid);
-        textTitle=findViewById(R.id.titleerg);
-        textMessage=findViewById(R.id.textView24w);
+        textTitle = findViewById(R.id.titleerg);
+        textMessage = findViewById(R.id.textView24w);
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (onClickListener != null) {
-                    onClickListener.onCancel();
+        if (btnCancel != null) {
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onClickListener != null) {
+                        onClickListener.onCancel();
+                    }
+                    cancel();
                 }
-                cancel();
-            }
-        });
+            });
+        }
 
-        btnOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (onClickListener != null) {
-                    onClickListener.onOk();
+        if (btnOk != null) {
+            btnOk.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onClickListener != null) {
+                        onClickListener.onOk();
+                    }
+                    cancel();
                 }
-                cancel();
-            }
-        });
+            });
+        }
     }
 
-    public void setTitle(String message){
-        textTitle.setText(message);
+    public void setTitle(String message) {
+        if (textTitle != null) {
+            textTitle.setText(message);
+        }
     }
 
-    public void setMessage(String message){
-        textMessage.setText(message);
+    public void setMessage(String message) {
+        if (textMessage != null) {
+            textMessage.setText(message);
+        }
     }
 
-    public void setOnClickListener(String textCancel, String textOK, OnClickListener onClickListener){
-        btnOk.setText(textOK);
-        btnCancel.setText(textCancel);
+    public void setOnClickListener(String textCancel, String textOK, OnClickListener onClickListener) {
+        if (btnOk != null && btnOk instanceof TextView) {
+            ((TextView) btnOk).setText(textOK);
+        }
+        if (btnCancel != null && btnCancel instanceof TextView) {
+            ((TextView) btnCancel).setText(textCancel);
+        }
+
         setOnClickListener(onClickListener);
     }
 
@@ -86,8 +99,9 @@ public class QuestionDialog extends Dialog {
         this.onClickListener = onClickListener;
     }
 
-    public interface OnClickListener{
+    public interface OnClickListener {
         void onCancel();
+
         void onOk();
     }
 
