@@ -29,7 +29,7 @@ public class DialogMessage extends Dialog {
 
 
     private void init(){
-        setContentView(R.layout.dialog_message);
+        setContentView(R.layout.ver_dialog_message);
         setCancelable(false);
         getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
